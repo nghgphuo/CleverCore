@@ -3,6 +3,12 @@ using CleverCore.Data.Entities;
 using CleverCore.WebApp.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using CleverCore.Application.Interfaces;
+using CleverCore.Data.EF.Repositories;
+using CleverCore.Data.IRepositories;
+using CleverCore.Application.Implementation;
+using CleverCore.Application.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,8 +24,13 @@ builder.Services.AddIdentity<AppUser, AppRole>()
 // Add application builder.Services.
 builder.Services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
 builder.Services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
+
+builder.Services.AddAutoMapper(typeof(AutoMapperConfig).Assembly);
+
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddTransient<DbInitializer>();
+builder.Services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
+builder.Services.AddTransient<IProductCategoryService, ProductCategoryService>();
 
 builder.Services.AddControllersWithViews();
 
