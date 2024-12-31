@@ -18,6 +18,7 @@ namespace CleverCore.Data.EF
         {
             _context = context;
         }
+
         public void Add(T entity)
         {
             _context.Add(entity);

@@ -52,9 +52,9 @@ namespace CleverCore.Data.EF
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<WholePrice> WholePrices { get; set; }
 
-        public DbSet<AdvertisementPage> AdvertistmentPages { get; set; }
-        public DbSet<Advertisement> Advertistments { get; set; }
-        public DbSet<AdvertisementPosition> AdvertistmentPositions { get; set; }
+        public DbSet<AdvertisementPage> AdvertisementPages { get; set; }
+        public DbSet<Advertisement> Advertisements { get; set; }
+        public DbSet<AdvertisementPosition> AdvertisementPositions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -83,7 +83,7 @@ namespace CleverCore.Data.EF
             builder.AddConfiguration(new FooterConfiguration());
             builder.AddConfiguration(new ProductTagConfiguration());
             builder.AddConfiguration(new SystemConfigConfiguration());
-            builder.AddConfiguration(new AdvertistmentPositionConfiguration());
+            builder.AddConfiguration(new AdvertisementPositionConfiguration());
 
             base.OnModelCreating(builder);
         }

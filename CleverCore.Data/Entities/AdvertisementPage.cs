@@ -6,11 +6,11 @@ using CleverCore.Infrastructure.SharedKernel;
 
 namespace CleverCore.Data.Entities
 {
-    [Table("AdvertistmentPages")]
+    [Table("AdvertisementPages")]
     public class AdvertisementPage : DomainEntity<string>
     {
         public string Name { get; set; }
 
-        public virtual ICollection<AdvertisementPosition> AdvertistmentPositions { get; set; }
+        public virtual ICollection<AdvertisementPosition> AdvertisementPositions { get; set; }
     }
 }

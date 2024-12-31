@@ -8,7 +8,7 @@ using System.Text;
 
 namespace CleverCore.Data.EF.Configurations
 {
-    public class AdvertistmentPositionConfiguration : DbEntityConfiguration<AdvertisementPosition>
+    public class AdvertisementPositionConfiguration : DbEntityConfiguration<AdvertisementPosition>
     {
         public override void Configure(EntityTypeBuilder<AdvertisementPosition> entity)
         {

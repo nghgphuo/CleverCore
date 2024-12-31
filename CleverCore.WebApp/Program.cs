@@ -1,22 +1,25 @@
-using CleverCore.WebApp.Data;
-using CleverCore.WebApp.Models;
+using CleverCore.Data.EF;
+using CleverCore.Data.Entities;
 using CleverCore.WebApp.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add builder.Services to the container.
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+                    o => o.MigrationsAssembly("CleverCore.Data.EF")));
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
+builder.Services.AddIdentity<AppUser, AppRole>()
+    .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
 // Add application builder.Services.
+builder.Services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
+builder.Services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddTransient<DbInitializer>();
 
 builder.Services.AddControllersWithViews();
 
@@ -31,6 +34,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -43,5 +47,11 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<DbInitializer>();
+    seeder.Seed();
+}
 
 app.Run();

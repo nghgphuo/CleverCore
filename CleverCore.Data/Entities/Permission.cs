@@ -24,7 +24,6 @@ namespace CleverCore.Data.Entities
         public bool CanUpdate { set; get; }
         public bool CanDelete { set; get; }
 
-
         [ForeignKey("RoleId")]
         public virtual AppRole AppRole { get; set; }
 

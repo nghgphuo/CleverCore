@@ -9,7 +9,7 @@ using CleverCore.Infrastructure.SharedKernel;
 
 namespace CleverCore.Data.Entities 
 {
-    [Table("Advertistments")]
+    [Table("Advertisements")]
     public class Advertisement : DomainEntity<int>, ISwitchable, ISortable
     {
         [StringLength(250)]
@@ -33,6 +33,6 @@ namespace CleverCore.Data.Entities
         public int SortOrder { set; get; }
 
         [ForeignKey("PositionId")]
-        public virtual AdvertisementPosition AdvertistmentPosition { get; set; }
+        public virtual AdvertisementPosition AdvertisementPosition { get; set; }
     }
 }
