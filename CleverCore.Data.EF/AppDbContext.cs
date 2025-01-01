@@ -11,6 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CleverCore.Data.EF.Extensions;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace CleverCore.Data.EF
 {
@@ -60,17 +63,17 @@ namespace CleverCore.Data.EF
         {
             #region Identity Config
 
-            builder.Entity<IdentityUserClaim<string>>().ToTable("AppUserClaims").HasKey(x => x.Id);
+            builder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims").HasKey(x => x.Id);
 
-            builder.Entity<IdentityRoleClaim<string>>().ToTable("AppRoleClaims")
+            builder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims")
                 .HasKey(x => x.Id);
 
-            builder.Entity<IdentityUserLogin<string>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
+            builder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
 
-            builder.Entity<IdentityUserRole<string>>().ToTable("AppUserRoles")
+            builder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles")
                 .HasKey(x => new { x.RoleId, x.UserId });
 
-            builder.Entity<IdentityUserToken<string>>().ToTable("AppUserTokens")
+            builder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens")
                .HasKey(x => new { x.UserId });
 
             #endregion Identity Config
@@ -80,12 +83,13 @@ namespace CleverCore.Data.EF
             builder.AddConfiguration(new ContactDetailConfiguration());
             builder.AddConfiguration(new FooterConfiguration());
             builder.AddConfiguration(new PageConfiguration());
-            builder.AddConfiguration(new FooterConfiguration());
+            builder.AddConfiguration(new FunctionConfiguration());
             builder.AddConfiguration(new ProductTagConfiguration());
             builder.AddConfiguration(new SystemConfigConfiguration());
             builder.AddConfiguration(new AdvertisementPositionConfiguration());
-
-            base.OnModelCreating(builder);
+            builder.AddConfiguration(new AdvertisementPageConfiguration());
+            builder.AddConfiguration(new AnnouncementConfiguration());
+            //base.OnModelCreating(builder);
         }
 
         public override int SaveChanges()
@@ -105,6 +109,19 @@ namespace CleverCore.Data.EF
                 }
             }
             return base.SaveChanges();
+        }
+    }
+    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    {
+        public AppDbContext CreateDbContext(string[] args)
+        {
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json").Build();
+            var builder = new DbContextOptionsBuilder<AppDbContext>();
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            builder.UseSqlServer(connectionString);
+            return new AppDbContext(builder.Options);
         }
     }
 }

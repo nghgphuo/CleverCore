@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CleverCore.Infrastructure.SharedKernel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using CleverCore.Infrastructure.SharedKernel;
 
 namespace CleverCore.Data.Entities
 {

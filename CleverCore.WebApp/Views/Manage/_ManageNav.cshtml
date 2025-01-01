@@ -1,6 +1,7 @@
-﻿@using CleverCore.WebApp.Views.Manage
+﻿@using CleverCore.Data.Entities
+@using CleverCore.WebApp.Views.Manage
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<ApplicationUser> SignInManager
+@inject SignInManager<AppUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

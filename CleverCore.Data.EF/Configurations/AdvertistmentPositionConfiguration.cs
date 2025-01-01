@@ -13,6 +13,7 @@ namespace CleverCore.Data.EF.Configurations
         public override void Configure(EntityTypeBuilder<AdvertisementPosition> entity)
         {
             entity.Property(c => c.Id).HasMaxLength(20).IsRequired();
+            entity.Property(c => c.PageId).HasMaxLength(20).IsRequired();
             // etc.
         }
     }
