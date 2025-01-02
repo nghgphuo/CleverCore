@@ -208,7 +208,6 @@ namespace CleverCore.Data.EF.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Avatar")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Balance")
@@ -604,7 +603,6 @@ namespace CleverCore.Data.EF.Migrations
                         .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ParentId")
-                        .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 

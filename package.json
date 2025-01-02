@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "bootstrap-daterangepicker": "^2.1.25",
+    "chart.js": "^2.7.3",
+    "datejs": "^1.0.0-rc3",
+    "fastclick": "^1.0.6",
+    "flot": "^4.2.6",
+    "flot-orderbars": "^1.0.0",
+    "flot-spline": "^0.0.1",
+    "flot.curvedlines": "^1.1.1",
+    "font-awesome": "^4.7.0",
+    "gentelella": "^1.4.0",
+    "moment": "^2.30.1",
+    "nprogress": "^0.2.0"
+  },
+  "devDependencies": {
+    "shelljs": "^0.8.5"
+  }
+}
