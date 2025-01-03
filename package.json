@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bootbox": "^6.0.0",
     "bootstrap-daterangepicker": "^2.1.25",
     "chart.js": "^2.7.3",
     "datejs": "^1.0.0-rc3",
@@ -11,6 +12,7 @@
     "font-awesome": "^4.7.0",
     "gentelella": "^1.4.0",
     "moment": "^2.30.1",
+    "notifyjs": "^3.0.0",
     "nprogress": "^0.2.0"
   },
   "devDependencies": {

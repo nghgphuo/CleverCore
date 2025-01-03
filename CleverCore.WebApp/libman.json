@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "notify@0.4.2",
+      "destination": "wwwroot/lib/notify/"
+    },
+    {
+      "library": "bootbox.js@4.4.0",
+      "destination": "wwwroot/lib/bootbox.js/"
+    }
+  ]
+}
