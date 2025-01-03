@@ -1,4 +1,5 @@
-﻿using CleverCore.Application.AutoMapper;
+﻿using Microsoft.Extensions.Logging;
+using CleverCore.Application.AutoMapper;
 using CleverCore.Application.Implementation;
 using CleverCore.Application.Interfaces;
 using CleverCore.Data.EF;
@@ -51,7 +52,11 @@ namespace CleverCore.Extensions
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
             services.AddTransient<IUnitOfWork, EFUnitOfWork>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null; // Giữ nguyên tên thuộc tính
+                });
 
             return services;
         }
